@@ -1,0 +1,23 @@
+<div class="sg_pagination u-row">
+    <div class="sg_pagination_left">
+        <span>共</span>
+        <span data-bind="text:totalCount"></span>
+        <span>条&nbsp&nbsp&nbsp每页显示：</span>
+         
+        <select class="sg_pagination_select_div" data-bind="value:pageSize,event:{change:pageSizeChange}">
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+    <div class="sg_pagination_right">
+        <button class="pagination-first-btn" data-bind="click:first,css: { 'pagination-first-btn-unavailable': leftUnavailable }"></button>
+        <button class="pagination-pre-btn" data-bind="click:pre ,css: { 'pagination-pre-btn-unavailable': leftUnavailable }"></button>
+        <span data-bind="text:currentPage()+1" class="current-page"></span><span class="total-page">/</span><span class="total-page" data-bind="text: totalPage"></span>
+        <button class="pagination-next-btn" data-bind="click:next ,css: { 'pagination-next-btn-unavailable': rightUnavailable }"></button>
+        <button class="pagination-last-btn" data-bind="click:last ,css: { 'pagination-last-btn-unavailable': rightUnavailable }"></button>
+        <input class="jump-pageindex" type="text" data-bind="value:jumpPageIndex">
+        <button class="pagination-btn" data-bind="click:jumpToPage,css: { 'pagination-btn-unavailable': goUnavailable }"></button>
+        
+    </div>
+</div>

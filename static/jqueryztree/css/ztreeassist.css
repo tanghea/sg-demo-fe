@@ -1,0 +1,41 @@
+.btn-default-new {
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.32857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0px 3px;
+  min-width: 50px;
+  margin-right: 0px;
+  height: 28px;
+  line-height: 28px;
+  font-size: 12px;
+  outline-color: #169274;
+  background-color: #ffffff;
+  border-color: #dfdfdf;
+  color: black;
+}
+.btn-default-new:hover {
+  background-color: #169274;
+  color: #fff;
+}
+.u-form-control {
+    height: 28px;
+    border: 1px solid #cecece;
+    padding: 6px 12px;
+    color: #333;
+    box-sizing: border-box;
+    font-size: 12px;
+    border-radius: 4px;
+}

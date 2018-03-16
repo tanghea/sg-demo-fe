@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <% if (htmlWebpackPlugin.options.files.css) { %>
+      <% htmlWebpackPlugin.options.files.css.forEach(function(name){ %>
+      <link rel="stylesheet" type="text/css" href="<%= name %>"> <% }) %>
+    <% } %>
+</head>
+<body>
+  <div id="container" class="animated fadeIn">
+    <box>
+      <box-filter params="title: $root.title()">
+      </box-filter>
+      <box-content>
+        <div class="u-row">
+          <div class="u-col-4" style="height: 464px;overflow: auto;">
+            <u-tree class="form-control" params='vm:{data:$root.treeModel,setting: $root.treeOption},
+        umeta:{"id":"tree","idField":"id","pidField":"pid","nameField":"name"}'>
+            </u-tree>
+          </div>
+          <div class="u-col-8">
+            <div class="pull-right">
+              <button class="btn btn-primary btn-sm m-r-sm" data-bind="click: $root.addchild">添加子节点</button>
+              <button class="btn btn-primary btn-sm m-r-sm" data-bind="click: $root.save">保存</button>
+              <button class="btn btn-danger btn-sm m-r-sm" data-bind="click: $root.remove">删除</button>
+            </div>
+            <div class="nofloat"></div>
+            <div id="mainpanel" class="u-row">
+              <div class="u-form-group">
+                <label class="u-col-3 u-form-group-sm u-form-label text-right">
+                  名称:
+                </label>
+                <div class="u-col-4">
+                  <input type="text" class="u-form-control" data-bind="value: $root.model.ref('name')" />
+                </div>
+              </div>
+              <div class="u-form-group">
+                <label class="u-col-3 u-form-group-sm u-form-label text-right">
+                  内部编码:
+                </label>
+                <div class="u-col-4">
+                  <input type="text" class="u-form-control" data-bind="value: $root.model.ref('innercode')" />
+                </div>
+              </div>
+              <div class="u-form-group">
+                <label class="u-col-3 u-form-group-sm u-form-label text-right">
+                  内部名称:
+                </label>
+                <div class="u-col-4">
+                  <input type="text" class="u-form-control" data-bind="value: $root.model.ref('innername')" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </box-content>
+    </box>
+  </div>
+  <% if (htmlWebpackPlugin.options.files.js) { %>
+    <% htmlWebpackPlugin.options.files.js.forEach(function(name){ %>
+    <script type="text/javascript" src="<%= name %>"></script><% }) %>
+  <% } %>
+</body>
+</html>

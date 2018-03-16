@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="css/jy_plugin.css" />
+		<link rel="stylesheet" href="css/pdfview.css" />
+		<style type="text/css">
+			.file_img{ position: relative; width: 90%; height: 600px; margin: 0 auto; overflow: auto; border: 2px solid #3399FF; text-align: center;}
+		</style>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.1.min.js" ></script>
+		<script src="js/jy_plugin.js"></script>
+		<script src="js/pdfjs/compatibility.js"></script>
+		<script src="js/pdfjs/debugger.js"></script>
+		<script src="js/pdfjs/pdf.js"></script>
+		<script src="js/UTCserver.js"></script>
+		<script src="js/pdfview.js"></script>
+	</head>
+	<body>
+		<div class="file_img"></div>
+		<button class="jy_btn import spos">选位置</button>
+		<script type="text/javascript">
+			// UTCserver.Initialize({
+			// 	path:'file/优泰签章 V1.0.0.14.exe',
+			// 	evaluate:'js/UTCserver_evaluate.js',
+			// 	success:function(version){
+			// 	},
+			// 	fail:function(message){
+			// 	}
+			// });
+			function loadpdf(path){
+				PDFview=pdfview({
+					fileurl:path,
+					filemain:'.file_img',
+					addtop:300,
+					complete:function(self){
+					},
+					change:function(num){
+						$('.gotoval').val(num);
+					}
+				});	
+			};
+			var PDFview;
+			loadpdf('file/3gDwjUTUwY3nZKmBKbL.pdf');
+			$(document).on('click','.spos',function(){
+				PDFview.selectsealpos({
+					percent:false,
+					over:function(p,x,y){
+						// UTCserver.Seal({
+						// 	data:'C:\\Users\\she\\Desktop\\浏览pdf\\file\\05M.pdf',
+						// 	type:'file',
+						// 	pin:'1234',
+						// 	page:p+'',
+						// 	x:x+'',
+						// 	y:y+'',
+						// 	success:function(data){
+						// 		loadpdf('file/05M.pdf');
+						// 	},
+						// 	fail:function(message){
+						// 		jyplugin.alert('签章失败，原因：'+message)
+						// 	}
+						// });
+						$('.spos').after('<br>'+p+'##'+x+'##'+y);
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

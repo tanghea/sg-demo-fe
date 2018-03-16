@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <% if (htmlWebpackPlugin.options.files.css) { %>
+    <% htmlWebpackPlugin.options.files.css.forEach(function(name){ %>
+    <link rel="stylesheet" type="text/css" href="<%= name %>"> <% }) %>
+    <% } %>
+    <link rel="stylesheet" href="../static/tree/bootstrap/3.3.4/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../static/tree/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    <link rel="stylesheet" href="../static/tree/css/portal.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+
+</head>
+<body>
+    <div id="container" class="animated fadeIn">
+        <div id="wrapper-content" class="wrapper-content" >
+          <box class="box">
+            <breadcrumbs params="path:'sgsupplyclasslist'"></breadcrumbs>
+            <box-filter params="title:'edit_title'">
+              <div class="box-filter"> <div class="pull-left box-filter-title">
+                <span data-bind="text:title">edit_title</span>
+              </div> <!-- ko template: { nodes: $componentTemplateNodes } -->
+              <div class="pull-right">
+                <button class="btn btn-primary btn-sm m-r-sm" data-bind="click:$root.save2">
+                  <span class="fa fa-save"></span>&nbsp;保存
+                </button>
+                  <a href="../list/index.html" class="btn btn-outline btn-sm m-r-sm"><span class="fa fa-reply"></span>&nbsp;返回</a>
+              </div><!-- /ko --> <!-- ko if: qhidden --><!-- /ko --> </div>
+            </box-filter>
+
+            <box-content params="title: '供应商维护:'" id="a1">
+            <form-ctn class="u-row" >
+              <div class="u-form-group">
+                <!--<label class="u-col-2 text-right u-form-label">树形展示:</label>-->
+                <div class="u-col-12">
+                  <div id="bs-ml-treetable" class="treetable">
+                    加载数据中...
+                  </div>
+                </div>
+              </div>
+            </form-ctn>
+          </box-content>
+          </box>
+        </div>
+    </div>
+
+    <% if (htmlWebpackPlugin.options.files.js) { %>
+      <% htmlWebpackPlugin.options.files.js.forEach(function(name){ %>
+        <script type="text/javascript" src="<%= name %>"></script>
+      <% }) %>
+    <% } %>
+    <script type="text/javascript" src="../static/tree/jquery.edittreetable.js"></script>
+    <script type="text/javascript">
+  var data = [{
+    id:1,name:"用友网络科技股份有限公司",pid:0,innercode:"1A"
+  },
+    {
+      id:2,name:"云应用孵化中心",pid:1,innercode:"1A2A",innername:'aab'
+    },
+    {
+      id:6,name:"云应用孵化中心",pid:1,innercode:"1A3A",innername:'aab'
+    },
+    {
+      id:4,name:"云应用孵化中心",pid:2,innercode:"1A4A",innername:'aab'
+    },
+    {
+      id:5,name:"云应用孵化中心",pid:4,innercode:"1A5A",innername:'aab'
+    },
+    {
+      id:6,name:"云应用孵化中心6",pid:3,innercode:"1A5A6",innername:'aab'
+    },
+    {
+      id:3,name:"阿里巴巴国内事业部",pid:0,innercode:"1A6A",innername:'aab'
+    }];
+
+  $("#bs-ml-treetable").bstreetable({
+    data:data,
+    maintitle:"公司名称",
+    nodeaddCallback:function(data,callback){
+      alert("===0"+ JSON.stringify(data));
+      //do your things then callback 新增的时候会返回一个字段叫pinnercode,表示父节点的innercode
+      callback({id:18,name:data.name,innercode:"ttttt",innername:"ttt",pid:data.pid});
+    },
+    noderemoveCallback:function(data,callback){
+      alert("===1"+ JSON.stringify(data));
+      //do your things then callback
+      callback();
+    },
+    nodeupdateCallback:function(data,callback){
+      alert("===2"+JSON.stringify(data));
+      //do your things then callback
+      callback();
+    },
+    extfield:[
+      {title:"innercode",key:"innercode",type:"input"},
+      {title:"innername",key:"innername",type:"input"}
+    ]//{title:"列名",key:"",type:"input"} input表示是输入框
+  })
+</script>
+
+</body>
+</html>

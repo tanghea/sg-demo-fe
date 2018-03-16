@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <% if (htmlWebpackPlugin.options.files.css) { %>
+    <% htmlWebpackPlugin.options.files.css.forEach(function(name){ %>
+      <link rel="stylesheet" type="text/css" href="<%= name %>">
+    <% }) %>
+  <% } %>
+</head>
+<body>
+<div id="container" class="animated fadeIn">
+  <box>
+    <breadcrumbs params="path: ['edit']"></breadcrumbs>
+    <box-filter params="title: $root.title()">
+      <div class="pull-right">
+        <button class="btn btn-primary btn-sm  m-r-sm" data-bind="click: $root.save"><span class="fa fa-save"></span>&nbsp;保存</button>
+        <a href="../list/index.html" class="btn btn-outline btn-sm m-r-sm"><span class="fa fa-reply"></span>&nbsp;返回</a>
+      </div>
+    </box-filter>
+    <box-content params="title: '布局'">
+      <div class="u-row">
+        <div class="u-form-group">
+          <label class="u-col-2 u-form-group-sm u-form-label text-right">
+            输入1
+          </label>
+          <div class="u-col-3">
+            <input type="text" class="u-form-control" data-bind="value: $root.model.ref('defProjectPsnName')" placeholder="input me">
+          </div>
+          <label class="u-col-2 u-form-group-sm u-form-label text-right">
+            输入2
+          </label>
+          <div class="u-col-3">
+            <input type="text" class="u-form-control" placeholder="input me" data-bind="value: $root.model.ref('defProjectPsnTel')">
+          </div>
+        </div>
+        <div class="u-form-group">
+          <label class="u-col-2 u-form-group-sm u-form-label text-right">
+            输入3
+          </label>
+          <div class="u-col-3">
+            <input type="text" class="u-form-control" placeholder="input me">
+          </div>
+          <label class="u-col-2 u-form-group-sm u-form-label text-right">
+            输入4
+          </label>
+          <div class="u-col-3">
+            <input type="text" class="u-form-control" placeholder="input me">
+          </div>
+        </div>
+      </div>
+    </box-content>
+
+    <box-content params="title: '表格显示'">
+      <u-grid params="config: $root.gridconfig"></u-grid>
+    </box-content>
+
+    <box-content params="title: '可编辑表格显示'">
+      <div class="pull-right">
+        <button class="btn btn-primary" data-bind="click: $root.addRow">添加</button>
+      </div>
+      <div class="nofloat" style="height: 10px;"></div>
+      <u-grid params="config: $root.editgridconfig"></u-grid>
+    </box-content>
+
+    <box-content params="title: 'ko-epui控件', model: $root.model">
+      <div class="u-row">
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">日期选择:</label>
+          <div class="u-col-3">
+            <u-datepicker params='vm: { data: $root.model }, umeta: { "id": "udatetime222", "field": "createTime", "startField": "exceptStartTime" }'></u-datepicker>
+          </div>
+        </div>
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">下拉框:</label>
+          <div class="u-col-3">
+            <u-select params='vm: {placeholder: "please select me",data: $root.model, datasource: $root.comboData }, umeta: { "field": "purchaseType" }'></u-select>
+          </div>
+        </div>
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">switch:</label>
+          <div class="u-col-3">
+            <u-switch params='vm: { data: $root.model }, umeta: { "field":"isCtrlOpen" }'></u-switch>
+          </div>
+        </div>
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">checkbox:</label>
+          <div class="u-col-3">
+            <u-checkbox params='vm: { data: $root.model, datasource: $root.checkboxData }, umeta: { "id": "c1", "field": "isCtrlOpen" }'></u-checkbox>
+          </div>
+        </div>
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">radio:</label>
+          <div class="u-col-3">
+            <u-radio params='vm: { data: $root.model, datasource: $root.radiodata }, umeta: {"id": "r1", "field": "openTenderType" }'></u-radio>
+          </div>
+        </div>
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">textarea:</label>
+          <div class="u-col-3">
+            <textarea class="u-form-control" data-bind="value: $root.model.ref('enterpriseName')"></textarea>
+          </div>
+        </div>
+      </box-content>
+
+      <box-content params="title: '参照'">
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">部门参照:</label>
+          <div class="u-col-3">
+            <refer params="type: 'org', showrefer: $root.showOrgRefer, onselect: $root.select, placeholder: '输入查询', showtext: $root.model.ref('enterpriseName'), value: $root.model.ref('enterpriseId')"></refer>
+          </div>
+        </div>
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">人员参照:</label>
+          <div class="u-col-3">
+            <refer params="type: 'person', showrefer: $root.showPsnRefer, onselect: $root.select, placeholder: '输入查询', showtext: $root.model.ref('userName'), value: $root.model.ref('userId')"></refer>
+          </div>
+        </div>
+        <div class="u-form-group">
+          <label class="u-col-2 text-right u-form-label">多选参照:</label>
+          <div class="u-col-3">
+            <button class="btn btn-primary" data-bind="click: $root.selectMulti">多选参照</button>
+          </div>
+        </div>
+        <div class="u-form-group">
+          <div class="u-col-2"></div>
+          <div class="u-col-10 text-left">
+            <button class="btn btn-primary" data-bind="click: $root.modalclick">普通弹框</button>
+            <button class="btn btn-primary" data-bind="click: $root.msgsuccess">成功消息</button>
+            <button class="btn btn-primary" data-bind="click: $root.msgfail">失败消息</button>
+            <button class="btn btn-primary" data-bind="click: $root.msgwarning">警告消息</button>
+          </div>
+        </div>
+        <div class="u-form-roup">
+          获取值:app.getComp("id")----id 是对应组件初始化的id <br>
+          实际编辑态值会自动保存到model对应字段:参考app.dataTables.model.getCurrentRow().getValue("openTenderType")
+        </div>
+      </div>
+    </box-content>
+  </box>
+</div>
+
+<% if (htmlWebpackPlugin.options.files.js) { %>
+  <% htmlWebpackPlugin.options.files.js.forEach(function(name){ %>
+    <script type="text/javascript" src="<%= name %>"></script>
+  <% }) %>
+<% } %>
+</body>
+</html>
